@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.green-background {
+	background-color: rgb(0, 209, 157);
+}
+
+.red-background {
+	background-color: rgb(248, 63, 64);
+}
+
+.menu.ui {
+	margin-bottom: 0;
+}
+
+.accountTotal.ui.header {
+	padding: 1rem 0;
+}
