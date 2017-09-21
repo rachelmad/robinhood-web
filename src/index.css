@@ -8,14 +8,14 @@ body {
 	background-color: rgb(0, 209, 157);
 }
 
+#portfolio-main-header-text > div{
+	color: white;
+}
+
 .red-background {
 	background-color: rgb(248, 63, 64);
 }
 
 #main-menu.menu.ui {
 	margin-bottom: 0;
-}
-
-.content.header {
-	color: white;
 }

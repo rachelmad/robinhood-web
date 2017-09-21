@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Header } from 'semantic-ui-react';
+import { Card, Statistic } from 'semantic-ui-react';
 import $ from 'jquery';
 
 export default class PortfolioMain extends Component {
@@ -63,20 +63,17 @@ export default class PortfolioMain extends Component {
   }
 
   render() {
-    var header = "$" + this.state.equity.toFixed(2);
+    var equity = "$" + this.state.equity.toFixed(2);
     var sign = (this.state.positiveEquity ? "+" : "-");
-    var meta = sign + "$" + this.state.equity_change.toFixed(2) + " (" + sign + this.state.equity_change_percent.toFixed(2) + "%)";
+    var equity_change = sign + "$" + this.state.equity_change.toFixed(2) + " (" + sign + this.state.equity_change_percent.toFixed(2) + "%)";
 
     return (
       <div>
         <Card fluid>
           <Card.Content id="portfolio-main-header" className = {this.state.positiveEquity ? "green-background": "red-background"} >
             <Card.Header>
-              {header}
+              <Statistic id="portfolio-main-header-text" value={equity} label={equity_change} />
             </Card.Header>
-            <Card.Meta>
-              {meta}
-            </Card.Meta>
           </Card.Content>
         </Card>
       </div>
