@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Header } from 'semantic-ui-react';
+import { Card, Header } from 'semantic-ui-react';
 import $ from 'jquery';
 
-export default class AccountTotal extends Component {
+export default class PortfolioMain extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       accountNumber: "",
-      equity: "",
+      equity: 0,
+      equity_change: 0,
+      equity_change_percent: 0,
       positiveEquity: false
     }
 
@@ -48,36 +50,35 @@ export default class AccountTotal extends Component {
         }
       })
       .then(function(data) {
-        var equity = data.extended_hours_equity || data.equity;
+        var equity = Number(data.extended_hours_equity || data.equity);
+        var equity_change = equity - data.equity_previous_close;
 
         this.setState({
           equity: equity,
-          positiveEquity: (equity > data.equity_previous_close)
+          positiveEquity: (equity > data.equity_previous_close),
+          equity_change: equity_change,
+          equity_change_percent: ((equity_change/equity) * 100)
         });
       }.bind(this));
   }
 
-  // getPositions(accountNumber) {
-  //   $.ajax({
-  //       type: 'GET', 
-  //       url: 'https://api.robinhood.com/accounts/',
-  //       headers: {
-  //         'Authorization': tokenString
-  //       }
-  //     })
-  //     .then(function(data) {
-  //       $.ajax({})
-  //     }.bind(this));
-  // }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   render() {
-    const { activeItem } = this.state
+    var header = "$" + this.state.equity.toFixed(2);
+    var sign = (this.state.positiveEquity ? "+" : "-");
+    var meta = sign + "$" + this.state.equity_change.toFixed(2) + " (" + sign + this.state.equity_change_percent.toFixed(2) + "%)";
 
     return (
-      <div className = {this.state.positiveEquity ? "green-background": "red-background"} >
-        <Header as='h1' className="accountTotal">{this.state.equity}</Header>
+      <div>
+        <Card fluid>
+          <Card.Content id="portfolio-main-header" className = {this.state.positiveEquity ? "green-background": "red-background"} >
+            <Card.Header>
+              {header}
+            </Card.Header>
+            <Card.Meta>
+              {meta}
+            </Card.Meta>
+          </Card.Content>
+        </Card>
       </div>
     )
   }

@@ -1,10 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Assistant', sans-serif;
 }
 
-.green-background {
+#portfolio-main-header.content.green-background {
 	background-color: rgb(0, 209, 157);
 }
 
@@ -12,10 +12,10 @@ body {
 	background-color: rgb(248, 63, 64);
 }
 
-.menu.ui {
+#main-menu.menu.ui {
 	margin-bottom: 0;
 }
 
-.accountTotal.ui.header {
-	padding: 1rem 0;
+.content.header {
+	color: white;
 }

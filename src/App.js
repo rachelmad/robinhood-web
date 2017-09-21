@@ -3,7 +3,7 @@ import { Button } from 'semantic-ui-react';
 import $ from 'jquery';
 
 import Header from './Header.js';
-import AccountTotal from './AccountTotal.js';
+import PortfolioMain from './PortfolioMain.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -52,7 +52,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header token={this.state.token}></Header>
-        <AccountTotal token={this.state.token}></AccountTotal>
+        <PortfolioMain token={this.state.token}></PortfolioMain>
         <Button onClick={this.logOut}>
           Log Out
         </Button>

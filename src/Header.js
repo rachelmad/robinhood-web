@@ -38,7 +38,7 @@ export default class Header extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu>
+      <Menu id="main-menu">
         <Menu.Item header>Robinhood</Menu.Item>
         <Menu.Item name='dashboard' active={activeItem === 'dashboard'} onClick={this.handleItemClick} />
         <Menu.Menu position='right'>
