@@ -12,7 +12,7 @@ body {
 	color: white;
 }
 
-.red-background {
+#portfolio-main-header.content.red-background {
 	background-color: rgb(248, 63, 64);
 }
 
