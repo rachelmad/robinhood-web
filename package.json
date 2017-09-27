@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "jquery": "^3.2.1",
-    "react": "^0.14.9",
-    "react-dom": "^15.6.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "semantic-ui-react": "^0.73.0",
     "victory": "^0.22.2"
   },

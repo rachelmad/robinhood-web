@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Grid } from 'semantic-ui-react';
 import $ from 'jquery';
 
 import Header from './Header.js';
 import PortfolioMain from './PortfolioMain.js';
+import Positions from './Positions.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,9 +13,12 @@ class App extends Component {
     super();
 
     this.state = {
-      token: ""
+      token: "",
+      accountNumber: ""
     };
+
     this.logOut = this.logOut.bind(this);
+    this.getAccountNumber = this.getAccountNumber.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +34,26 @@ class App extends Component {
           token: data.token
         })
       );
-    }.bind(this));
+
+      this.getAccountNumber(data.token);
+    }.bind(this))
+  }
+
+  getAccountNumber(token) {
+    var tokenString = "Token " + token;
+
+      $.ajax({
+        type: 'GET', 
+        url: 'https://api.robinhood.com/accounts/',
+        headers: {
+          'Authorization': tokenString
+        }
+      })
+      .then(function(data) {
+        this.setState({
+          accountNumber: data.results[0].account_number
+        })
+      }.bind(this));
   }
 
   logOut() {
@@ -52,7 +75,17 @@ class App extends Component {
     return (
       <div className="App">
         <Header token={this.state.token}></Header>
-        <PortfolioMain token={this.state.token}></PortfolioMain>
+        <Grid padded>
+          <Grid.Row>
+            <Grid.Column width={6}>
+              <PortfolioMain token={this.state.token} accountNumber={this.state.accountNumber}></PortfolioMain>
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <Positions token={this.state.token} accountNumber={this.state.accountNumber}></Positions>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        
         <Button onClick={this.logOut}>
           Log Out
         </Button>
